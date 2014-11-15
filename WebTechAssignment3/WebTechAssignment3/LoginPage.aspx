@@ -17,7 +17,7 @@
         <asp:Label ID="lbl_emailSignin" runat="server" Text="E-Mail"></asp:Label><br />
         <asp:TextBox ID="txt_emailSignin" runat="server" Width="154px" Text = "user@gmail.com" ></asp:TextBox>
         <br/>
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid email format" ControlToValidate="txt_emailSignin" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"> </asp:RegularExpressionValidator>
+        <asp:RegularExpressionValidator ID="EmailValidator" runat="server" ErrorMessage="Invalid email format" ControlToValidate="txt_emailSignin" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"> </asp:RegularExpressionValidator>
         <br />
         <br />
         <asp:Label ID="lbl_passwordSignin" runat="server" Text="Password"></asp:Label><br />

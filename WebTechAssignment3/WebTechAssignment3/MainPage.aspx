@@ -11,14 +11,58 @@
     <div id = "LoginInformation" align = "right">
             <asp:Label ID = "lbl_currentUser" runat ="server" Text ="CurrentUser" /> 
             <asp:LinkButton ID="btn_logout" runat="server" onclick="btn_logout_Click" >Log out</asp:LinkButton>
+    </div>
+    <div id = "AddBook" runat="server" align = "center">
+             <asp:Label ID = "lbl_bookTitle" runat ="server" Text ="Book Title" />
+             <br />
+             <asp:TextBox ID="txt_bookTitle" runat="server" Width="154px">haha</asp:TextBox>
+             <br />
+             <br />
+             <asp:Label ID="lbl_bookAuthor" runat="server" Text="Author"></asp:Label>
+             <br />
+             <asp:TextBox ID="txt_bookAuthor" runat="server" Width="154px">haha</asp:TextBox>
+             <br />
+             <br />
+             <asp:Label ID="lbl_year" runat="server" Text="Year"></asp:Label>
+             <br />
+             <asp:TextBox ID="txt_year" runat="server" Width="154px">100</asp:TextBox>
+             <br />
+             <asp:RegularExpressionValidator ID="YearValidator" runat="server" ErrorMessage="Only Number!" ControlToValidate="txt_year" ValidationExpression="^[0-9]*$*"> </asp:RegularExpressionValidator> 
+             <br />
+             <asp:Label ID="lbl_isbn" runat="server" Text="ISBN"></asp:Label>
+             <br />
+             <asp:TextBox ID="txt_isbn" runat="server" Width="154px">111111111</asp:TextBox>
+             <br />
+             <asp:RegularExpressionValidator ID="ISBNValidator" runat="server" ErrorMessage="Only Number!" ControlToValidate="txt_isbn" ValidationExpression="^[0-9]*$*"> </asp:RegularExpressionValidator> 
+             <br />
+             <asp:Label ID="volume" runat="server" Text="Volume"></asp:Label>
+             <br />
+             <asp:TextBox ID="txt_volume" runat="server" Width="154px">1</asp:TextBox>
+             <br />
+             <br />
+             <asp:Label ID="Label1" runat="server" Text="Category"></asp:Label>
+             <br />
+             <asp:DropDownList ID="droplist_bookCategory" runat="server" Width="154px" 
+                 DataSourceID="DataSource_BookCategory" DataTextField="Category" 
+                 DataValueField="ID">
+             </asp:DropDownList>
+             <asp:SqlDataSource ID="DataSource_BookCategory" runat="server" 
+                 ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+                 ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
+                 SelectCommand="SELECT * FROM [Category]"></asp:SqlDataSource>
+                 <br/>
+                 <br/>
+             <asp:Button ID="btn_addBook" runat="server" Text="Add Book" 
+                 onclick="btn_addBook_Click" />
+            <br/>
+            <asp:Label ID = "lbl_errorAddBook" runat="server" Text = " " />
+             <br />
 
     </div>
-    <div id = "GridView" align = "center">
+    <div id = "GridView" align = "left">
         <asp:SqlDataSource ID="DataSource_AvailableBook" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
-            
-            
+            ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>"        
             SelectCommand="SELECT Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID NOT IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = false)))">
         </asp:SqlDataSource>
                 <asp:SqlDataSource ID="DataSource_AllBook" runat="server" 
@@ -40,7 +84,7 @@
                     <asp:ListItem Value="BorrowedBook">Borrowed Book</asp:ListItem>
         </asp:DropDownList>
         <br />
-                <asp:GridView ID="GridView_Book" runat="server" 
+                <asp:GridView ID="GridView_Book" runat="server" width = "700px"
             DataSourceID="DataSource_AllBook" AllowPaging="True" 
             AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
             BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">

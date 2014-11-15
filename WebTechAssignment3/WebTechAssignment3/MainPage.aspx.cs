@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.OleDb;
+using System.Data;
 
 namespace WebTechAssignment3
 {
     public partial class Main : System.Web.UI.Page
     {
-        string currentUserEmail = "user@gmail.com";
         OleDbConnection conn = null;
         OleDbCommand cmd = null;
         string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|/Database.accdb;Persist Security Info=True";
@@ -74,5 +74,33 @@ namespace WebTechAssignment3
             Session.Abandon();
             Response.Redirect("LoginPage.aspx", true);
         }
+
+        protected void btn_addBook_Click(object sender, EventArgs e)
+        {
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            try
+            {
+                connection.Open();
+                OleDbCommand insert = new OleDbCommand();
+                insert.Connection = connection;
+
+                insert.CommandType = CommandType.Text;
+                insert.CommandText = "insert into Book ([BookName],[BookAuthor],[BookPublishedIn],[ISBN],[BookEdition],[BookCategory]) values (?,?,?,?,?,?)";
+                insert.Parameters.Add(new OleDbParameter("BookName", txt_bookTitle.Text));
+                insert.Parameters.Add(new OleDbParameter("BookAuthor", txt_bookAuthor.Text));
+                insert.Parameters.Add(new OleDbParameter("BookPublishedIn", int.Parse(txt_year.Text)));
+                insert.Parameters.Add(new OleDbParameter("ISBN",int.Parse(txt_isbn.Text)));
+                insert.Parameters.Add(new OleDbParameter("BookEdition", txt_volume.Text));
+                insert.Parameters.Add(new OleDbParameter("BookCategory",int.Parse( droplist_bookCategory.SelectedValue)));
+                insert.ExecuteNonQuery();
+                lbl_errorAddBook.Text = "Successfully registered!";
+                connection.Close();
+                GridView_Book.DataBind();
+            }
+            catch
+            {
+            }
+        }
+
     }
 }

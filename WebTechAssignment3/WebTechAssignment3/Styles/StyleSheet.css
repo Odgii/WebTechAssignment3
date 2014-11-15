@@ -1,0 +1,28 @@
+﻿body 
+{
+    background: #b6b7bc;
+    font-size: .80em;
+    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #696969;
+}
+#loginPage
+  {
+  height: 100%;
+  width:900px;
+  margin:0 auto;
+}
+#left
+{
+    background-color:#E6E6E6;
+    float:left;   
+    width:448px
+}
+
+#right
+{
+    background-color:#E6E6E6;
+    width: 448px;
+    float:right;
+}

@@ -87,7 +87,7 @@
         &nbsp;
         <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
         <br />
-                <asp:GridView ID="GridView_Book" runat="server" width = "700px" AutoPostBack="true"
+                <asp:GridView ID="GridView_Book" runat="server" width = "700px"
                   DataSourceID="DataSource_AllBook" AllowPaging="True" 
                    AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
                     BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" >

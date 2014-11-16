@@ -21,6 +21,24 @@ namespace WebTechAssignment3
             {
                 lbl_currentUser.Text = "Hi! " + getCurrentUserName(Session["loggedUser"].ToString());
             }
+            foreach (GridViewRow row in GridView_Book.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    string bookTitle = row.Cells[1].Text;
+                    if (bookTitle != null && bookIsBorrowed(bookTitle) == true)
+                    {
+
+                        LinkButton theButton = (LinkButton)row.FindControl("btn_borrowBook");
+
+                        if (theButton != null)
+                        {
+                            theButton.Enabled = false;
+                            theButton.Text = "Borrowed";
+                        }
+                    }
+                }
+            } 
             
         }
 
@@ -58,9 +76,10 @@ namespace WebTechAssignment3
                 {
                     if (row.RowType == DataControlRowType.DataRow)
                     {
-                        string bookTitle = row.Cells[1].Text;
-                        if (bookTitle != null && bookIsAvailable(bookTitle) == false)
+                        string bookTitle = row.Cells[1].Text;                      
+                        if (bookTitle != null && bookIsBorrowed(bookTitle) == true)
                         {
+
                             LinkButton theButton = (LinkButton)row.FindControl("btn_borrowBook");
 
                             if (theButton != null)
@@ -149,7 +168,7 @@ namespace WebTechAssignment3
             Response.Redirect("UserProfile.aspx", true);
         }
 
-        protected bool bookIsAvailable(string bookTitle)
+        protected bool bookIsBorrowed(string bookTitle)
         {
             conn = new OleDbConnection(connectionString);
             string bookID = null;
@@ -158,24 +177,23 @@ namespace WebTechAssignment3
                 conn.Open();
                 cmd = new OleDbCommand("Select ID FROM Book where BookName='" + bookTitle + "'", conn);
                 int x = (int)cmd.ExecuteScalar();
-                if (x == 1)
+                if (x != 0 )
                 {
                     bookID = cmd.ExecuteScalar().ToString();
                 }
-                OleDbCommand comd = new OleDbCommand("Select count(*) from BorrowedBook where BorrowedBookID='" + bookID + "'" + " and where State=true", conn);
+                OleDbCommand comd = new OleDbCommand("Select count(*) from BorrowedBook where BorrowedBookID=" + bookID + " and State=true", conn);
                 int res = (int)comd.ExecuteScalar();
                 if (res == 1)
                 {
-                    return false;
+                    return true;
                 }
                 conn.Close();
 
             }
             catch
             {
-                //lbl_error.Text = e.Message;
             }
-            return true;
+            return false;
         }       
     }
 }

@@ -25,7 +25,7 @@
             New here?<br />
             Register an account for free</h1>
 
-            <asp:Label ID="Label5" runat="server" Text=" " CssClass="error-message"></asp:Label>
+            <asp:Label ID="lbl_errorSignup" runat="server" Text=" " CssClass="error-message"></asp:Label>
 
             <asp:Label ID="lbl_firstname" runat="server" Text="First name:" CssClass="label-login"></asp:Label>
             <asp:TextBox ID="txt_firstname" runat="server" Width="148px"></asp:TextBox>

@@ -219,11 +219,9 @@ namespace WebTechAssignment3
                     insertIntoBorrowedBooks.Parameters.Add(new OleDbParameter("BorrowedUserID", int.Parse(Session["userID"].ToString())));
                     insertIntoBorrowedBooks.Parameters.Add(new OleDbParameter("State", OleDbType.Boolean)).Value = true;
                     insertIntoBorrowedBooks.Parameters.Add(new OleDbParameter("BorrowDate", OleDbType.Date)).Value = System.DateTime.Now;
-
                     insertIntoBorrowedBooks.ExecuteNonQuery();
                     conn.Close();
                     GridView_Book.DataBind();
-
                 }
             }
             catch (Exception exp1)

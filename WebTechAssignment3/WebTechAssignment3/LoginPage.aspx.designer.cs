@@ -22,13 +22,13 @@ namespace WebTechAssignment3 {
         protected global::System.Web.UI.HtmlControls.HtmlForm login;
         
         /// <summary>
-        /// cover control.
+        /// lbl_error control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image cover;
+        protected global::System.Web.UI.WebControls.Label lbl_error;
         
         /// <summary>
         /// lbl_emailSignin control.
@@ -49,13 +49,13 @@ namespace WebTechAssignment3 {
         protected global::System.Web.UI.WebControls.TextBox txt_emailSignin;
         
         /// <summary>
-        /// EmailValidator control.
+        /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailValidator;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
         /// lbl_passwordSignin control.
@@ -85,13 +85,13 @@ namespace WebTechAssignment3 {
         protected global::System.Web.UI.WebControls.Button btn_login;
         
         /// <summary>
-        /// lbl_error control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_error;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// lbl_firstname control.
@@ -193,12 +193,12 @@ namespace WebTechAssignment3 {
         protected global::System.Web.UI.WebControls.Button btn_signup;
         
         /// <summary>
-        /// lbl_errorSignup control.
+        /// cover control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_errorSignup;
+        protected global::System.Web.UI.WebControls.Image cover;
     }
 }

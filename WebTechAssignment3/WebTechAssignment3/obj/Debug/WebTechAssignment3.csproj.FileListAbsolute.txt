@@ -8,3 +8,8 @@ C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTec
 C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.csprojResolveAssemblyReference.cache
 C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.dll
 C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.pdb
+C:\xampp\htdocs\webtech\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\bin\WebTechAssignment3.dll
+C:\xampp\htdocs\webtech\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\bin\WebTechAssignment3.pdb
+C:\xampp\htdocs\webtech\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.csprojResolveAssemblyReference.cache
+C:\xampp\htdocs\webtech\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.dll
+C:\xampp\htdocs\webtech\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.pdb

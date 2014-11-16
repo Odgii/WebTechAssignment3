@@ -3,12 +3,11 @@
 
 body   
 {
-    background: #b6b7bc;
-    font-size: .80em;
+    background: white;
     font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
     padding: 0px;
-    color: #696969;
+    color: #333333;
 }
 
 
@@ -41,7 +40,7 @@ p
 h1, h2, h3, h4, h5, h6
 {
     font-size: 1.5em;
-    color: #666666;
+    color: #0072bc;
     font-variant: small-caps;
     text-transform: none;
     font-weight: 200;
@@ -87,21 +86,37 @@ first child of the left and right table columns */
 /* PRIMARY LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
+/* MJ */
+.wrapper 
+{
+    margin: 0 auto;
+    padding: 20px 0 0 0;
+    width: 1024px;
+    border-left: 1px solid #4b6c9e;
+    border-right: 1px solid #4b6c9e;
+}
+
+.header { width: 1024px; }
+
+.login-box 
+{
+    background: #dedede;
+    padding: 30px;
+    margin: 20px;
+    width: 400px;
+    height: 200px;
+    float: left;     
+}
+.label-login { width: 100px; display: inline-block; font-weight: bold; }
+.login-box h1 { margin: 0; font-weight: bold; }
+.error-message { padding: 8px; background: #EEb0b0; display: block; margin: 5px; }
+
 .page
 {
     width: 960px;
     background-color: #fff;
     margin: 20px auto 0px auto;
     border: 1px solid #496077;
-}
-
-.header
-{
-    position: relative;
-    margin: 0px;
-    padding: 0px;
-    background: #4b6c9e;
-    width: 100%;
 }
 
 .header h1
@@ -138,6 +153,41 @@ first child of the left and right table columns */
     text-align: center;
     line-height: normal;
 }
+
+.button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #0071bc;
+	padding: 4px 16px;
+	background: -moz-linear-gradient(
+		top,
+		#ffffff 0%,
+		#f0f0f0 50%,
+		#b5b5b5);
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#ffffff),
+		color-stop(0.50, #f0f0f0),
+		to(#b5b5b5));
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px solid #0071bc;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.4),
+		inset 0px 0px 11px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.4),
+		inset 0px 0px 11px rgba(255,255,255,1);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.4),
+		inset 0px 0px 11px rgba(255,255,255,1);
+	text-shadow:
+		0px -2px 0px rgba(000,000,000,0.1),
+		0px 1px 0px rgba(255,255,255,1);
+}
+
+
 
 
 /* TAB MENU   

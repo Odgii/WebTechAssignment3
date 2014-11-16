@@ -1,0 +1,22 @@
+﻿<%@ Master Language="C#" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kirberich Group Library</title>
+    <link href="Styles/Site.css" type="text/css" rel="Stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="header">
+            <img src="img/header.png" />
+        </div>
+
+        <asp:ContentPlaceHolder ID="Main" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

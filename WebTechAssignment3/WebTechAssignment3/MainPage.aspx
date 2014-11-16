@@ -63,22 +63,18 @@
     <div id = "GridView" align = "left">
         <asp:SqlDataSource ID="DataSource_AvailableBook" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>"        
-            
-            
-            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID NOT IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = true)))">
+            ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>"                 
+            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID NOT IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = true)))" >
         </asp:SqlDataSource>
                 <asp:SqlDataSource ID="DataSource_AllBook" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
-            
-            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID)">
+            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID)" >
         </asp:SqlDataSource>
                 <asp:SqlDataSource ID="DataSource_BorrowedBook" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
-            
-            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = true)))">
+            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = true)))" >
         </asp:SqlDataSource>
         <br/>
         <br/>
@@ -88,13 +84,17 @@
                     <asp:ListItem Value="AvailableBook">Available Book</asp:ListItem>
                     <asp:ListItem Value="BorrowedBook">Borrowed Book</asp:ListItem>
         </asp:DropDownList>
+        &nbsp;
+        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
         <br />
-                <asp:GridView ID="GridView_Book" runat="server" width = "700px"
-            DataSourceID="DataSource_AllBook" AllowPaging="True" 
-            AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
-            BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" >
+                <asp:GridView ID="GridView_Book" runat="server" width = "700px" AutoPostBack="true"
+                  DataSourceID="DataSource_AllBook" AllowPaging="True" 
+                   AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
+                    BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" >
                     <Columns>
-                        <asp:ImageField HeaderText = "Image" ControlStyle-Height="100px" ControlStyle-Width = "100px" DataImageUrlField = "Image"  ></asp:ImageField>   
+                        <asp:ImageField HeaderText = "Image" ControlStyle-Height="100px" ControlStyle-Width = "100px" DataImageUrlField = "Image"  >
+                                <ControlStyle Height="100px" Width="100px"></ControlStyle>
+                        </asp:ImageField> 
                         <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"/>
                         <asp:BoundField DataField="Author" HeaderText="Author" 
                             SortExpression="Author" />
@@ -105,6 +105,14 @@
                             SortExpression="Volume" />
                         <asp:BoundField DataField="Category" HeaderText="Category" 
                             SortExpression="Category" />
+                        <asp:TemplateField HeaderText="BorrowBook">
+                            <ItemTemplate>
+                            <asp:LinkButton ID="btn_borrowBook" runat="server"  
+                            CommandName="BorowBook"
+                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Borrow Book</asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                       
                     </Columns>
                     <FooterStyle BackColor="White" ForeColor="#000066" />
                     <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />

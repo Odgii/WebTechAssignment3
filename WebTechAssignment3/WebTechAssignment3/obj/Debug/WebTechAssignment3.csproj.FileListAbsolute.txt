@@ -3,3 +3,8 @@ c:\users\dolcevita\documents\visual studio 2010\Projects\WebTechAssignment3\WebT
 c:\users\dolcevita\documents\visual studio 2010\Projects\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.dll
 c:\users\dolcevita\documents\visual studio 2010\Projects\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.pdb
 C:\Users\DolceVita\documents\visual studio 2010\Projects\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.csprojResolveAssemblyReference.cache
+C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\bin\WebTechAssignment3.dll
+C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\bin\WebTechAssignment3.pdb
+C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.csprojResolveAssemblyReference.cache
+C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.dll
+C:\Users\DolceVita\Documents\GitHub\WebTechAssignment3\WebTechAssignment3\WebTechAssignment3\obj\Debug\WebTechAssignment3.pdb

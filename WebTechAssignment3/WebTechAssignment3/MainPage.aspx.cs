@@ -52,19 +52,63 @@ namespace WebTechAssignment3
             if (BookViewTypes.SelectedValue == "AllBook")
             {
                 GridView_Book.DataSourceID = "DataSource_AllBook";
-                GridView_Book.DataBind();       
+                GridView_Book.DataBind();   
+                //disable the borrowed books
+                foreach (GridViewRow row in GridView_Book.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        string bookTitle = row.Cells[1].Text;
+                        if (bookTitle != null && bookIsAvailable(bookTitle) == false)
+                        {
+                            LinkButton theButton = (LinkButton)row.FindControl("btn_borrowBook");
+
+                            if (theButton != null)
+                            {
+                                theButton.Enabled = false;
+                                theButton.Text = "Borrowed";
+                            }
+                        }
+                    }
+                } 
             }
             if (BookViewTypes.SelectedValue == "AvailableBook")
             {
                 GridView_Book.DataSourceID = "DataSource_AvailableBook";
                 GridView_Book.DataBind();
+                //for all available book make enable borrow book button
+                foreach (GridViewRow row in GridView_Book.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        LinkButton theLinkButton = (LinkButton)row.FindControl("btn_borrowBook");
+
+                        if (theLinkButton != null)
+                        {
+                            theLinkButton.Enabled = true;
+                        }
+                    }
+                } 
             }
             if (BookViewTypes.SelectedValue == "BorrowedBook") 
             {
                 GridView_Book.DataSourceID = "DataSource_BorrowedBook";
                 GridView_Book.DataBind();
-            }
-            
+                //for all borrowed book show that its borrowed and disable the borrow book button
+                foreach (GridViewRow row in GridView_Book.Rows)
+                {
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        LinkButton theButton = (LinkButton)row.FindControl("btn_borrowBook");
+
+                        if (theButton != null)
+                        {
+                            theButton.Enabled = false;
+                            theButton.Text = "Borrowed";
+                        }
+                    }
+                } 
+            }          
             }
 
         protected void btn_logout_Click(object sender, EventArgs e)
@@ -105,6 +149,33 @@ namespace WebTechAssignment3
             Response.Redirect("UserProfile.aspx", true);
         }
 
-       
+        protected bool bookIsAvailable(string bookTitle)
+        {
+            conn = new OleDbConnection(connectionString);
+            string bookID = null;
+            try
+            {
+                conn.Open();
+                cmd = new OleDbCommand("Select ID FROM Book where BookName='" + bookTitle + "'", conn);
+                int x = (int)cmd.ExecuteScalar();
+                if (x == 1)
+                {
+                    bookID = cmd.ExecuteScalar().ToString();
+                }
+                OleDbCommand comd = new OleDbCommand("Select count(*) from BorrowedBook where BorrowedBookID='" + bookID + "'" + " and where State=true", conn);
+                int res = (int)comd.ExecuteScalar();
+                if (res == 1)
+                {
+                    return false;
+                }
+                conn.Close();
+
+            }
+            catch
+            {
+                //lbl_error.Text = e.Message;
+            }
+            return true;
+        }       
     }
 }

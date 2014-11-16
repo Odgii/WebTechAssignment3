@@ -39,12 +39,12 @@ namespace WebTechAssignment3
             try
             {
                 conn.Open();
-                cmd = new OleDbCommand("Select count(*) FROM [User] where UserEmail='" + txt_emailSignin.Text + "'" + "and UserPassword='" + txt_passwordSignin.Text + "'", conn);
-                int x = (int)cmd.ExecuteScalar();
-                lbl_errorSignup.Text = x.ToString();
-                if (x == 1)
+                cmd = new OleDbCommand("Select ID FROM [User] where UserEmail='" + txt_emailSignin.Text + "'" + "and UserPassword='" + txt_passwordSignin.Text + "'", conn);
+                string userID = cmd.ExecuteScalar().ToString();
+                if (userID != "0")
                 {
                     Session["loggedUser"] = txt_emailSignin.Text;
+                    Session["userID"] = userID;
                     return true;
                 }
                 conn.Close();

@@ -90,7 +90,8 @@
                 <asp:GridView ID="GridView_Book" runat="server" width = "700px"
                   DataSourceID="DataSource_AllBook" AllowPaging="True" 
                    AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
-                    BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" >
+                    BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" 
+            CellPadding="3" OnRowCommand="GridView_Book_RowCommand" >
                     <Columns>
                         <asp:ImageField HeaderText = "Image" ControlStyle-Height="100px" ControlStyle-Width = "100px" DataImageUrlField = "Image"  >
                                 <ControlStyle Height="100px" Width="100px"></ControlStyle>
@@ -108,8 +109,9 @@
                         <asp:TemplateField HeaderText="BorrowBook">
                             <ItemTemplate>
                             <asp:LinkButton ID="btn_borrowBook" runat="server"  
-                            CommandName="BorowBook"
-                            CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Borrow Book</asp:LinkButton>
+                            CommandName="BorrowBook"
+                            CommandArgument='<%# Eval("Name") %>'
+                            Text = "Borrow Book"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                        

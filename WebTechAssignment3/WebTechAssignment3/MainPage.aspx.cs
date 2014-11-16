@@ -52,9 +52,7 @@ namespace WebTechAssignment3
             if (BookViewTypes.SelectedValue == "AllBook")
             {
                 GridView_Book.DataSourceID = "DataSource_AllBook";
-                GridView_Book.DataBind();
-         
-
+                GridView_Book.DataBind();       
             }
             if (BookViewTypes.SelectedValue == "AvailableBook")
             {
@@ -102,5 +100,11 @@ namespace WebTechAssignment3
             }
         }
 
+        protected void userProfile_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserProfile.aspx", true);
+        }
+
+       
     }
 }

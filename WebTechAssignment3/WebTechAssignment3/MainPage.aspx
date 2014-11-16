@@ -9,35 +9,36 @@
 <body>
     <form id="form1" runat="server">
     <div id = "LoginInformation" align = "right">
-            <asp:Label ID = "lbl_currentUser" runat ="server" Text ="CurrentUser" /> 
-            <asp:LinkButton ID="btn_logout" runat="server" onclick="btn_logout_Click" >Log out</asp:LinkButton>
+            <asp:LinkButton ID="lbl_currentUser" runat="server" onclick="userProfile_Click" Text="CurrentUser"></asp:LinkButton>
+            <asp:LinkButton ID="btn_logout" runat="server" onclick="btn_logout_Click" Text = "Log Out" ></asp:LinkButton>
     </div>
     <div id = "AddBook" runat="server" align = "center">
              <asp:Label ID = "lbl_bookTitle" runat ="server" Text ="Book Title" />
+             &nbsp;&nbsp;
              <br />
-             <asp:TextBox ID="txt_bookTitle" runat="server" Width="154px">haha</asp:TextBox>
+             <asp:TextBox ID="txt_bookTitle" runat="server" Width="154px"></asp:TextBox>
              <br />
              <br />
              <asp:Label ID="lbl_bookAuthor" runat="server" Text="Author"></asp:Label>
              <br />
-             <asp:TextBox ID="txt_bookAuthor" runat="server" Width="154px">haha</asp:TextBox>
+             <asp:TextBox ID="txt_bookAuthor" runat="server" Width="154px"></asp:TextBox>
              <br />
              <br />
              <asp:Label ID="lbl_year" runat="server" Text="Year"></asp:Label>
              <br />
-             <asp:TextBox ID="txt_year" runat="server" Width="154px">100</asp:TextBox>
+             <asp:TextBox ID="txt_year" runat="server" Width="154px"></asp:TextBox>
              <br />
              <asp:RegularExpressionValidator ID="YearValidator" runat="server" ErrorMessage="Only Number!" ControlToValidate="txt_year" ValidationExpression="^[0-9]*$*"> </asp:RegularExpressionValidator> 
              <br />
              <asp:Label ID="lbl_isbn" runat="server" Text="ISBN"></asp:Label>
              <br />
-             <asp:TextBox ID="txt_isbn" runat="server" Width="154px">111111111</asp:TextBox>
+             <asp:TextBox ID="txt_isbn" runat="server" Width="154px"></asp:TextBox>
              <br />
              <asp:RegularExpressionValidator ID="ISBNValidator" runat="server" ErrorMessage="Only Number!" ControlToValidate="txt_isbn" ValidationExpression="^[0-9]*$*"> </asp:RegularExpressionValidator> 
              <br />
              <asp:Label ID="volume" runat="server" Text="Volume"></asp:Label>
              <br />
-             <asp:TextBox ID="txt_volume" runat="server" Width="154px">1</asp:TextBox>
+             <asp:TextBox ID="txt_volume" runat="server" Width="154px"></asp:TextBox>
              <br />
              <br />
              <asp:Label ID="Label1" runat="server" Text="Category"></asp:Label>
@@ -63,17 +64,21 @@
         <asp:SqlDataSource ID="DataSource_AvailableBook" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>"        
-            SelectCommand="SELECT Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID NOT IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = false)))">
+            
+            
+            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID NOT IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = true)))">
         </asp:SqlDataSource>
                 <asp:SqlDataSource ID="DataSource_AllBook" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
-            SelectCommand="SELECT Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID)">
+            
+            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID)">
         </asp:SqlDataSource>
                 <asp:SqlDataSource ID="DataSource_BorrowedBook" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" 
-            SelectCommand="SELECT Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID NOT IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = true)))">
+            
+            SelectCommand="SELECT Book.BookImgUrl AS [Image], Book.BookName AS Name, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN, Book.BookEdition AS Volume, Category.Category FROM (Book INNER JOIN Category ON Book.BookCategory = Category.ID) WHERE (Book.ID IN (SELECT BorrowedBookID FROM BorrowedBook WHERE (State = true)))">
         </asp:SqlDataSource>
         <br/>
         <br/>
@@ -87,13 +92,15 @@
                 <asp:GridView ID="GridView_Book" runat="server" width = "700px"
             DataSourceID="DataSource_AllBook" AllowPaging="True" 
             AllowSorting="True" AutoGenerateColumns="False" BackColor="White" 
-            BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
+            BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" >
                     <Columns>
-                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                        <asp:ImageField HeaderText = "Image" ControlStyle-Height="100px" ControlStyle-Width = "100px" DataImageUrlField = "Image"  ></asp:ImageField>   
+                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"/>
                         <asp:BoundField DataField="Author" HeaderText="Author" 
                             SortExpression="Author" />
                         <asp:BoundField DataField="Year" HeaderText="Year" SortExpression="Year" />
-                        <asp:BoundField DataField="ISBN" HeaderText="ISBN" SortExpression="ISBN" />
+                        <asp:BoundField DataField="ISBN" HeaderText="ISBN" 
+                            SortExpression="ISBN" />
                         <asp:BoundField DataField="Volume" HeaderText="Volume" 
                             SortExpression="Volume" />
                         <asp:BoundField DataField="Category" HeaderText="Category" 

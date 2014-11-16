@@ -10,7 +10,7 @@
 <body>
 <form id="login" runat="server">
     <div id = "loginPage" align ="center" >  
-    <asp:Image ID="cover"  runat="server" ImageUrl= "library.jpg" Height="212px" Width="900px" />   
+    <asp:Image ID="cover"  runat="server" ImageUrl= "/img/library.jpg" Height="212px" Width="900px" />   
     <div id = "left" style='float:left;'> 
         <br />
         <br /> 

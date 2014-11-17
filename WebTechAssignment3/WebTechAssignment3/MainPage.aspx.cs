@@ -21,6 +21,24 @@ namespace WebTechAssignment3
             {
                 lbl_currentUser.Text = "Hi! " + getCurrentUserName(Session["loggedUser"].ToString());
             }
+            foreach (GridViewRow row in GridView_Book.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    string bookTitle = row.Cells[1].Text;
+                    if (bookTitle != null && bookIsBorrowed(bookTitle) == true)
+                    {
+
+                        LinkButton theButton = (LinkButton)row.FindControl("btn_borrowBook");
+
+                        if (theButton != null)
+                        {
+                            theButton.Enabled = false;
+                            theButton.Text = "Borrowed";
+                        }
+                    }
+                }
+            } 
             
         }
 
@@ -58,9 +76,10 @@ namespace WebTechAssignment3
                 {
                     if (row.RowType == DataControlRowType.DataRow)
                     {
-                        string bookTitle = row.Cells[1].Text;
-                        if (bookTitle != null && bookIsAvailable(bookTitle) == false)
+                        string bookTitle = row.Cells[1].Text;                      
+                        if (bookTitle != null && bookIsBorrowed(bookTitle) == true)
                         {
+
                             LinkButton theButton = (LinkButton)row.FindControl("btn_borrowBook");
 
                             if (theButton != null)
@@ -149,7 +168,7 @@ namespace WebTechAssignment3
             Response.Redirect("UserProfile.aspx", true);
         }
 
-        protected bool bookIsAvailable(string bookTitle)
+        protected bool bookIsBorrowed(string bookTitle)
         {
             conn = new OleDbConnection(connectionString);
             string bookID = null;
@@ -158,24 +177,58 @@ namespace WebTechAssignment3
                 conn.Open();
                 cmd = new OleDbCommand("Select ID FROM Book where BookName='" + bookTitle + "'", conn);
                 int x = (int)cmd.ExecuteScalar();
-                if (x == 1)
+                if (x != 0 )
                 {
                     bookID = cmd.ExecuteScalar().ToString();
                 }
-                OleDbCommand comd = new OleDbCommand("Select count(*) from BorrowedBook where BorrowedBookID='" + bookID + "'" + " and where State=true", conn);
+                OleDbCommand comd = new OleDbCommand("Select count(*) from BorrowedBook where BorrowedBookID=" + bookID + " and State=true", conn);
                 int res = (int)comd.ExecuteScalar();
                 if (res == 1)
                 {
-                    return false;
+                    return true;
                 }
                 conn.Close();
 
             }
             catch
             {
-                //lbl_error.Text = e.Message;
             }
-            return true;
-        }       
+            return false;
+        }
+
+        //add books to user's borrowed book list
+
+        protected void GridView_Book_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            conn = new OleDbConnection(connectionString);
+            string bookID = null;
+            try
+            {
+                if (e.CommandName == "BorrowBook")
+                {
+                    string bookTitle= e.CommandArgument.ToString();
+                    conn.Open();
+                    cmd = new OleDbCommand("Select ID FROM Book where BookName='" + bookTitle + "'", conn);
+                    int x = (int)cmd.ExecuteScalar();
+                    if (x != 0)
+                    {
+                        bookID = cmd.ExecuteScalar().ToString();
+                    }
+                    OleDbCommand insertIntoBorrowedBooks = new OleDbCommand("insert into BorrowedBook([BorrowedBookID],[BorrowedUserID],[State],[BorrowDate]) values (?,?,?,?)", conn);
+                    insertIntoBorrowedBooks.Parameters.Add(new OleDbParameter("BorrowedBookID", int.Parse(bookID)));
+                    insertIntoBorrowedBooks.Parameters.Add(new OleDbParameter("BorrowedUserID", int.Parse(Session["userID"].ToString())));
+                    insertIntoBorrowedBooks.Parameters.Add(new OleDbParameter("State", OleDbType.Boolean)).Value = true;
+                    insertIntoBorrowedBooks.Parameters.Add(new OleDbParameter("BorrowDate", OleDbType.Date)).Value = System.DateTime.Now;
+                    insertIntoBorrowedBooks.ExecuteNonQuery();
+                    conn.Close();
+                    GridView_Book.DataBind();
+                }
+            }
+            catch (Exception exp1)
+            {
+
+              Label2.Text = exp1.Message;
+            }
+        }
     }
 }

@@ -46,10 +46,7 @@
     </div>
     <div id="loginPage" align="center">
         <asp:Image ID="cover" runat="server" ImageUrl="/img/library.jpg" Height="212px" Width="900px" />
-        <div id="left" style='float: left;'>
-          
-     
-            
+        <div id="left" style='float: left;'>          
         </div>
         <div id="right">
          

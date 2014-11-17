@@ -61,39 +61,66 @@ namespace WebTechAssignment3
             return false;
         }
 
+        protected bool accountExists()
+        {
+            conn = new OleDbConnection(connectionString);
+            bool ret = false;
+            try
+            {
+                conn.Open();
+                cmd = new OleDbCommand("Select ID FROM [User] where UserEmail='" + txt_emailSignup.Text + "'", conn);
+                string userID = cmd.ExecuteScalar().ToString();
+                if (userID != "0")
+                {
+                    ret = true;
+                }
+
+            }
+            catch
+            {
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ret;
+        }
+
         protected void btn_signup_Click(object sender, EventArgs e)
         {
-            if (isRegistered() == true)
+            if (accountExists() == true)
             {
-                lbl_errorSignup.Visible = false;
+                lbl_errorSignup.Visible = true;
                 lbl_errorSignup.Text = "E-Mail already registered!";
             }
             else
             {
                 OleDbConnection connection = new OleDbConnection(connectionString);
                 try
-                 {
+                {
                     connection.Open();
                     OleDbCommand insert = new OleDbCommand();
                     insert.Connection = connection;
-                    
+
                     insert.CommandType = CommandType.Text;
                     insert.CommandText = "insert into [User] ([UserFirstName],[UserLastName],[UserEmail],[UserPassword],[UserBirthDate]) values (?,?,?,?,?)";
-                    insert.Parameters.Add(new OleDbParameter("UserFirstName",txt_firstname.Text));
-                    insert.Parameters.Add(new OleDbParameter("UserLastName",txt_lastname.Text));
-                    insert.Parameters.Add(new OleDbParameter("UserEmail",txt_emailSignup.Text));
-                    insert.Parameters.Add(new OleDbParameter("UserPassword",txt_passwordSignup.Text));
-                    insert.Parameters.Add(new OleDbParameter("UserBirthDate",txt_birthdate.Text));
+                    insert.Parameters.Add(new OleDbParameter("UserFirstName", txt_firstname.Text));
+                    insert.Parameters.Add(new OleDbParameter("UserLastName", txt_lastname.Text));
+                    insert.Parameters.Add(new OleDbParameter("UserEmail", txt_emailSignup.Text));
+                    insert.Parameters.Add(new OleDbParameter("UserPassword", txt_passwordSignup.Text));
+                    insert.Parameters.Add(new OleDbParameter("UserBirthDate", txt_birthdate.Text));
                     insert.ExecuteNonQuery();
-                    lbl_errorSignup.Text = "Successfully registered!";
+                    lbl_errorSignup.Visible = true;
+                    lbl_errorSignup.Text = "Successfully registered! You can sign in now.";
+                }
+                catch
+                {
+                }
+                finally
+                {
                     connection.Close();
-                    }      
-            catch {
+                }
             }
-            }
-            
-            
-
         }
         
     }

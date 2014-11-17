@@ -45,6 +45,7 @@ h1, h2, h3, h4, h5, h6
     text-transform: none;
     font-weight: 200;
     margin-bottom: 0px;
+    margin-top: 5px;
 }
 
 h1
@@ -97,7 +98,21 @@ first child of the left and right table columns */
 }
 
 .header { width: 1024px; }
-
+.main-menu 
+{
+    background: #dedede;
+    padding: 7px 15px;
+}
+.main-menu a 
+{
+    color: #0072bc;
+    text-decoration: none;  
+    font-weight: bold;
+}
+.main-menu a:hover
+{
+    color: white;
+}
 .login-box 
 {
     background: #dedede;
@@ -108,9 +123,21 @@ first child of the left and right table columns */
     float: left;     
 }
 .label-login { width: 100px; display: inline-block; font-weight: bold; }
+.label-add-book { width: 100px; display: inline-block; }
 .login-box h1 { margin: 0; font-weight: bold; }
 .error-message { padding: 8px; background: #EEb0b0; display: block; margin: 5px; }
 
+.add-book 
+{
+    background: #ccc;
+    text-align: left;
+    padding: 20px;
+}
+.book-list 
+{
+    text-align: left;
+    padding: 20px;
+}
 .page
 {
     width: 960px;

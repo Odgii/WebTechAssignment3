@@ -18,8 +18,36 @@ namespace WebTechAssignment3
         {
            string currentUser = getUserID(Session["loggedUser"].ToString());
 
+           if (Session["loggedUser"] != null)
+           {
+               lbl_currentUser.Text = "Hi! " + getCurrentUserName(Session["loggedUser"].ToString());
+           }
+
            // string currentUser = "1";
             DataSource_BorrowedBook.SelectCommand = "SELECT Book.BookImgUrl AS [Image], Book.BookName AS Title, Book.BookAuthor AS Author, Book.BookPublishedIn AS [Year], Book.ISBN ,b.BorrowDate , b.ReturnDate  FROM Book INNER JOIN BorrowedBook b ON Book.ID =b.BorrowedBookID where b.BorrowedUserID =" + currentUser ;
+        }
+
+        protected string getCurrentUserName(string userEmail)
+        {
+            conn = new OleDbConnection(connectionString);
+            string userName = "";
+            try
+            {
+                conn.Open();
+                cmd = new OleDbCommand("Select UserFirstName FROM [User] where UserEmail='" + userEmail + "'", conn);
+                OleDbDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    userName = reader.GetString(0);
+                }
+                conn.Close();
+            }
+            catch
+            {
+                //lbl_error.Text = e.Message;
+            }
+            return userName;
         }
 
         protected string getUserID(string userEmail)
@@ -41,6 +69,23 @@ namespace WebTechAssignment3
             {
             }
             return id;
+
+        }
+
+        protected void btn_logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("LoginPage.aspx", true);
+        }
+
+        protected void userProfile_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("UserProfile.aspx", true);
+        }
+
+        protected void homeLink_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MainPage.aspx", true);
         }
     }
 }

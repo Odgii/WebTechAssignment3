@@ -17,7 +17,8 @@ namespace WebTechAssignment3
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lbl_error.Visible = false;
+            lbl_errorSignup.Visible = false;
         }
 
         protected void loginButton_Click(object sender, EventArgs e)
@@ -29,6 +30,7 @@ namespace WebTechAssignment3
             }
             else
             {
+                lbl_error.Visible = true;
                 lbl_error.Text = "Wrong email or password";
             }
         }
@@ -61,6 +63,7 @@ namespace WebTechAssignment3
         {
             if (isRegistered() == true)
             {
+                lbl_errorSignup.Visible = false;
                 lbl_errorSignup.Text = "E-Mail already registered!";
             }
             else

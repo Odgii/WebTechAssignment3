@@ -154,7 +154,7 @@ namespace WebTechAssignment3
                 insert.Parameters.Add(new OleDbParameter("BookEdition", txt_volume.Text));
                 insert.Parameters.Add(new OleDbParameter("BookCategory",int.Parse( droplist_bookCategory.SelectedValue)));
                 insert.ExecuteNonQuery();
-                lbl_errorAddBook.Text = "Successfully registered!";
+                lbl_errorAddBook.Text = "Successfully added a new book!";
                 connection.Close();
                 GridView_Book.DataBind();
             }
@@ -166,6 +166,11 @@ namespace WebTechAssignment3
         protected void userProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("UserProfile.aspx", true);
+        }
+
+        protected void homeLink_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MainPage.aspx", true);
         }
 
         protected bool bookIsBorrowed(string bookTitle)

@@ -85,13 +85,13 @@ namespace WebTechAssignment3 {
         protected global::System.Web.UI.WebControls.Button btn_login;
         
         /// <summary>
-        /// Label5 control.
+        /// lbl_errorSignup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label lbl_errorSignup;
         
         /// <summary>
         /// lbl_firstname control.

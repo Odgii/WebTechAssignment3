@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.OleDb;
+using System.Web.Security;
 
 namespace WebTechAssignment3
 {
@@ -75,6 +76,7 @@ namespace WebTechAssignment3
         protected void btn_logout_Click(object sender, EventArgs e)
         {
             Session.Abandon();
+            FormsAuthentication.SignOut();
             Response.Redirect("LoginPage.aspx", true);
         }
 

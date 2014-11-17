@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.OleDb;
 using System.Data;
+using System.Web.Security;
 
 namespace WebTechAssignment3
 {
@@ -26,7 +27,8 @@ namespace WebTechAssignment3
             if (isRegistered())
             {
                 Session.Add("isAuth", "yes");
-                Response.Redirect("MainPage.aspx", true);
+                FormsAuthentication.RedirectFromLoginPage(Session["loggedUser"].ToString(), false);
+                // Response.Redirect("MainPage.aspx", true);
             }
             else
             {

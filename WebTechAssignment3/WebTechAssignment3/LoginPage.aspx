@@ -7,7 +7,7 @@
         <h1>
             Existing user?<br />
             Please login here</h1>
-        <asp:Label ID="lbl_error" runat="server" Text=" " CssClass="error-message" ></asp:Label>
+        <asp:Label ID="lbl_error" runat="server" Text=" " CssClass="error-message"></asp:Label>
         <asp:Label ID="lbl_emailSignin" runat="server" Text="E-Mail:" CssClass="label-login"></asp:Label>
         <asp:TextBox ID="txt_emailSignin" runat="server" Width="154px" Text="user@gmail.com"></asp:TextBox>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid email format"

@@ -49,6 +49,15 @@ namespace WebTechAssignment3 {
         protected global::System.Web.UI.WebControls.LinkButton btn_logout;
         
         /// <summary>
+        /// lbl_error control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_error;
+        
+        /// <summary>
         /// DataSource_BorrowedBook control.
         /// </summary>
         /// <remarks>

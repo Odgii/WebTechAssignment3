@@ -14,12 +14,13 @@
 
     <div align="center">
         <h1 class="bold">User History</h1>
+        <asp:Label ID="lbl_error" runat="server" Text="Label"></asp:Label>
         <asp:SqlDataSource ID="DataSource_BorrowedBook" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"
             ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>"></asp:SqlDataSource>
         <br />
         <asp:GridView ID="GridView_BorrowedBooks" runat="server" BackColor="White" BorderColor="White"
             BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" GridLines="None"
-            AutoGenerateColumns="False" DataSourceID="DataSource_BorrowedBook">
+            AutoGenerateColumns="False" DataSourceID="DataSource_BorrowedBook" OnRowCommand="GridView_BorrowedBooks_RowCommand"   >
             <Columns>
                 <asp:ImageField HeaderText="Image" ControlStyle-Height="100px" ControlStyle-Width="100px"
                     DataImageUrlField="Image">
@@ -30,6 +31,12 @@
                 <asp:BoundField DataField="ISBN" HeaderText="ISBN" SortExpression="ISBN" />
                 <asp:BoundField DataField="BorrowDate" HeaderText="BorrowDate" SortExpression="BorrowDate" />
                 <asp:BoundField DataField="ReturnDate" HeaderText="ReturnDate" SortExpression="ReturnDate" />
+                 <asp:TemplateField HeaderText="ReturnBook">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btn_returnBook" runat="server" CommandName="ReturnBook" CommandArgument='<%# Eval("Title") %>'
+                                Text="Return Book"></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
             </Columns>
             <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
             <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
